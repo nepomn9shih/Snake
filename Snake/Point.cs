@@ -55,8 +55,33 @@ namespace Snake
         }
         public void Draw()
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
+            try
+            {
+                Console.SetCursorPosition(x, y);
+                Console.Write(sym);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.SetCursorPosition(40, 12);
+                WriteGameOver();
+            }
+        }
+        void WriteGameOver()
+        {
+            int xOffset = 25;
+            int yOffset = 8;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(xOffset, yOffset++);
+            WriteText("============================", xOffset, yOffset++);
+            WriteText("И Г Р А    О К О Н Ч Е Н А", xOffset + 1, yOffset++);
+            yOffset++;
+            WriteText("Автор:Непомнящих Александр", xOffset + 1, yOffset++);
+            WriteText("============================", xOffset, yOffset++);
+        }
+        void WriteText(String text, int xOffset, int yOffset)
+        {
+            Console.SetCursorPosition(xOffset, yOffset);
+            Console.WriteLine(text);
         }
 
         public void Clear()
